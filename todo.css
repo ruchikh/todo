@@ -1,0 +1,10 @@
+.todo {
+    /* text-align: center; */
+    width: 50%;
+    margin: 0 auto;
+}
+
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+}
