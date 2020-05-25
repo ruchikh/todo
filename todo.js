@@ -13,14 +13,15 @@ function addTodo(event) {
         title: input.value,
         completed: false,
     }
-    
+
     fetch(apiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(todoObj)
-        })                            // the status for this request is 200 but the database is not getting update.
+        })     
+    // Status for this request is 200 but the database is not getting update.
     todos = [...todos, todoObj];
     displayTodoList(todos);
     input.value = '';
@@ -41,16 +42,15 @@ function deleteTodo(e) {
 }
 
 function displayTodoList(arr= []) {
-    ul.innerHTML = '';
-    arr.forEach((arrItem, i) => {
-        ul.innerHTML += 
-        `<li class='todo-box'>
-            <input type="checkbox" class="todo-checkbox" id=${i} ${arrItem.completed ? 'checked' : ""} />
-            <label class="todo-item">${arrItem.title}</label>
-            <button class='todo-delete-btn' id=${i}>X</button>
-        </li>
-        `;
-    })
+    ul.innerHTML = arr.map((arrItem, i) => {
+        return(
+            `<li class='todo-box'>
+                <input type="checkbox" class="todo-checkbox" id=${i} ${arrItem.completed ? 'checked' : ""} />
+                <span class="todo-item">${arrItem.title}</span>
+                <button class='todo-delete-btn' id=${i}>X</button>
+            </li>`
+        )
+    }).join('')
 }
 
 function getTodoList() {
@@ -64,7 +64,8 @@ function markAsDone(e) {
     if(e.target.className !== 'todo-checkbox') return;
     var id = e.target.id;
     todos[id].completed = !todos[id].completed;
-}
+    displayTodoList(todos)
+} // Ad suggested to complete a todo no API call to be made
 
 ul.addEventListener('click', deleteTodo);
 ul.addEventListener('click', markAsDone);

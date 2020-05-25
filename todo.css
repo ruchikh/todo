@@ -37,8 +37,6 @@
 
 i {
     color: red;
-    background: no-repeat;
-    z-index: 2;
 }
 
 .todo-delete-btn {
@@ -50,8 +48,8 @@ i {
     z-index: 2;
 }
 
-.todo-delete-btn:focus {
-    border: 0;
+button:focus {
+    border: none;
 }
 
 .todo-top-text {
@@ -62,3 +60,7 @@ i {
     width: 70%;
     margin: 0 auto;
 }
+
+input[type=checkbox]:checked + span.todo-item {
+    text-decoration: line-through;
+  }
